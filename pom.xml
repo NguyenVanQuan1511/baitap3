@@ -1,28 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
-         version="6.0">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-    <!-- Khai báo Servlet -->
-    <servlet>
-        <servlet-name>EmailListServlet</servlet-name>
-        <servlet-class>vn.edu.hcmuaf.fit.demo2.EmailListServlet</servlet-class>
-    </servlet>
+    <groupId>vn.edu.hcmute.fit</groupId>
+    <artifactId>web3</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>web3</name>
+    <packaging>war</packaging>
 
-    <servlet-mapping>
-        <servlet-name>EmailListServlet</servlet-name>
-        <url-pattern>/EmailListServlet</url-pattern>
-    </servlet-mapping>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Dùng đúng JDK 17 cho khớp Docker -->
+        <maven.compiler.release>17</maven.compiler.release>
+        <junit.version>5.13.2</junit.version>
+    </properties>
 
-    <!-- Cấu hình session -->
-    <session-config>
-        <session-timeout>30</session-timeout>
-    </session-config>
+    <dependencies>
+        <!-- Tomcat 11 = Jakarta Servlet 6.x -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.1.0</version>
+            <scope>provided</scope>
+        </dependency>
 
-    <!-- File mặc định khi mở ứng dụng -->
-    <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
-</web-app>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Khóa compiler ở release 17 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <release>${maven.compiler.release}</release>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <!-- Không bắt buộc phải có web.xml trong Jakarta 6 -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
