@@ -1,20 +1,29 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<html>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Thank You</title>
+    <meta charset="UTF-8"/>
+    <title>Thanks</title>
+    <link rel="stylesheet" href="styles/main.css"/>
 </head>
 <body>
-    <h1>Thanks for filling out our survey!</h1>
-    <p>Here is the information you entered:</p>
+<main class="container">
+    <h1>Thanks for joining our list</h1>
+
+    <p>Here is the information that you entered:</p>
+
     <ul>
-        <li>First Name: ${firstName}</li>
-        <li>Last Name: ${lastName}</li>
-        <li>Email: ${email}</li>
-        <li>Date of Birth: ${dob}</li>
-        <li>Heard about us: ${hearAbout}</li>
-        <li>Receive News: ${receiveNews}</li>
-        <li>Receive Email Announcements: ${receiveEmail}</li>
-        <li>Preferred Contact Method: ${contactMethod}</li>
+        <li>First name: ${user.firstName}</li>
+        <li>Last name: ${user.lastName}</li>
+        <li>Email: ${user.email}</li>
+        <li>Date of birth: ${user.dob}</li>
+        <li>Heard about us: ${user.hearAbout}</li>
+        <li>Receive CDs offers: ${user.receiveCds ? "Yes" : "No"}</li>
+        <li>Receive email announcements: ${user.receiveEmails ? "Yes" : "No"}</li>
+        <li>Preferred contact: ${user.contactBy}</li>
     </ul>
+
+    <p><a href="index.html">Back to survey</a></p>
+</main>
 </body>
 </html>
