@@ -9,9 +9,9 @@ import java.io.IOException;
 public class EmailListServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-
+        
         // Lấy dữ liệu từ form, nếu null thì set chuỗi rỗng để tránh lỗi
         String firstName = request.getParameter("firstName");
         if (firstName == null) firstName = "";
