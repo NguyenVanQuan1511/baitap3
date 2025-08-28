@@ -1,54 +1,46 @@
-package vn.edu.hcmuaf.fit.demo2;
+package vn.edu.hcmute.fit.web3;
 
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
-@WebServlet("/emailList")
 public class EmailListServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        
-        // Lấy dữ liệu từ form, nếu null thì set chuỗi rỗng để tránh lỗi
-        String firstName = request.getParameter("firstName");
-        if (firstName == null) firstName = "";
 
-        String lastName = request.getParameter("lastName");
-        if (lastName == null) lastName = "";
+        req.setCharacterEncoding("UTF-8");
 
-        String email = request.getParameter("email");
-        if (email == null) email = "";
+        User user = new User();
+        user.setFirstName(req.getParameter("firstName"));
+        user.setLastName(req.getParameter("lastName"));
+        user.setEmail(req.getParameter("email"));
+        user.setDob(req.getParameter("dob"));
+        user.setHearAbout(req.getParameter("hearAbout"));
+        user.setReceiveCds("yes".equalsIgnoreCase(req.getParameter("receiveCds")));
+        user.setReceiveEmails("yes".equalsIgnoreCase(req.getParameter("receiveEmails")));
+        user.setContactBy(req.getParameter("contactBy"));
 
-        String dob = request.getParameter("dob");
-        if (dob == null) dob = "";
+        // (Tùy chọn) kiểm tra đơn giản
+        if (user.getEmail() == null || user.getEmail().isBlank()) {
+            resp.sendRedirect(req.getContextPath() + "/index.html");
+            return;
+        }
 
-        String hearAbout = request.getParameter("hearAbout");
-        if (hearAbout == null) hearAbout = "Not specified";
+        req.setAttribute("user", user);
+        RequestDispatcher rd = req.getRequestDispatcher("/thanks.jsp");
+        rd.forward(req, resp);
+    }
 
-        String receiveNews = request.getParameter("receiveNews");
-        if (receiveNews == null) receiveNews = "No";
-
-        String receiveEmail = request.getParameter("receiveEmail");
-        if (receiveEmail == null) receiveEmail = "No";
-
-        String contactMethod = request.getParameter("contactMethod");
-        if (contactMethod == null) contactMethod = "Not specified";
-
-        // Đưa dữ liệu sang JSP
-        request.setAttribute("firstName", firstName);
-        request.setAttribute("lastName", lastName);
-        request.setAttribute("email", email);
-        request.setAttribute("dob", dob);
-        request.setAttribute("hearAbout", hearAbout);
-        request.setAttribute("receiveNews", receiveNews);
-        request.setAttribute("receiveEmail", receiveEmail);
-        request.setAttribute("contactMethod", contactMethod);
-
-        // Forward sang thanks.jsp
-        RequestDispatcher dispatcher = request.getRequestDispatcher("thanks.jsp");
-        dispatcher.forward(request, response);
+    // Cho phép submit bằng GET khi bạn mở trực tiếp link thử nghiệm
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        doPost(req, resp);
     }
 }
