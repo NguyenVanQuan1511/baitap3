@@ -1,45 +1,39 @@
-package vn.edu.hcmute.fit.demo1;
+package vn.edu.hcmute.fit.web3;
 
-import java.io.Serializable;
-
-public class User implements Serializable {
+public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private String dob;
+    private String hearAbout;
+    private boolean receiveCds;
+    private boolean receiveEmails;
+    private String contactBy;
 
-    public User() {
-        this.firstName = "";
-        this.lastName = "";
-        this.email = "";
-    }
+    public User() {}
 
-    public User(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
+    // Getters & Setters
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getLastName() {
-        return lastName;
-    }
+    public String getDob() { return dob; }
+    public void setDob(String dob) { this.dob = dob; }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    public String getHearAbout() { return hearAbout; }
+    public void setHearAbout(String hearAbout) { this.hearAbout = hearAbout; }
 
-    public String getEmail() {
-        return email;
-    }
+    public boolean isReceiveCds() { return receiveCds; }
+    public void setReceiveCds(boolean receiveCds) { this.receiveCds = receiveCds; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public boolean isReceiveEmails() { return receiveEmails; }
+    public void setReceiveEmails(boolean receiveEmails) { this.receiveEmails = receiveEmails; }
+
+    public String getContactBy() { return contactBy; }
+    public void setContactBy(String contactBy) { this.contactBy = contactBy; }
 }
