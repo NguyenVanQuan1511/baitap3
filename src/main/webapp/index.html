@@ -1,28 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Murach's Java Servlets and JSP</title>
-    <link rel="stylesheet" href="styles/main.css" type="text/css"/>
+    <meta charset="UTF-8">
+    <title>Survey</title>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
-<body>
-<h1>Join our email list</h1>
-<p>To join our email list, enter your name and
-    email address below.</p>
+<body>-
+<!-- Logo Murach -->
+<div style="text-align:center; margin-top:20px;">
+    <img src="images/murach.jpg" alt="Murach Logo" style="height:100px;">
+</div>
+
+<h1>Survey</h1>
+<p>If you have a moment, we'd appreciate it if you would fill out this survey.</p>
+
 <form action="emailList" method="post">
-    <input type="hidden" name="action" value="add">
-
-    <label>Email:</label>
-    <input type="email" name="email" required><br>
-
     <label>First Name:</label>
     <input type="text" name="firstName" required><br>
 
     <label>Last Name:</label>
     <input type="text" name="lastName" required><br>
 
-    <label>&nbsp;</label>
-    <input type="submit" value="Join Now" id="submit">
+    <label>Email:</label>
+    <input type="email" name="email" required><br>
+
+    <label>Date of Birth:</label>
+    <input type="date" name="dob"><br>
+
+    <label>How did you hear about us?</label>
+    <select name="hearAbout">
+        <option value="search">Search Engine</option>
+        <option value="word">Word of Mouth</option>
+        <option value="social">Social Media</option>
+        <option value="other">Other</option>
+    </select><br>
+
+    <label>
+        <input type="checkbox" name="receiveUpdates" value="yes">
+        Would you like to receive announcements about new products and special offers?
+    </label><br>
+
+    <label>
+        <input type="radio" name="contact" value="email" checked>Email
+    </label>
+    <label>
+        <input type="radio" name="contact" value="phone">Phone
+    </label>
+    <label>
+        <input type="radio" name="contact" value="none">Do not contact me
+    </label><br>
+
+    <input type="submit" value="Submit">
 </form>
 </body>
 </html>

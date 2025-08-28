@@ -1,44 +1,54 @@
-package vn.edu.hcmute.fit.demo1;
+package vn.edu.hcmuaf.fit.demo2;
 
-import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
+import java.io.IOException;
 
+@WebServlet("/emailList")
 public class EmailListServlet extends HttpServlet {
-    @Override
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response)
-            throws ServletException, IOException {
-
-        String url = "/index.html";
-
-        String action = request.getParameter("action");
-        if (action == null) {
-            action = "join";
-        }
-
-        if (action.equals("join")) {
-            url = "/index.html";
-        } else if (action.equals("add")) {
-            String firstName = request.getParameter("firstName");
-            String lastName = request.getParameter("lastName");
-            String email = request.getParameter("email");
-
-            User user = new User(firstName, lastName, email);
-
-            request.setAttribute("user", user);
-            url = "/thanks.jsp";
-        }
-
-        getServletContext()
-                .getRequestDispatcher(url)
-                .forward(request, response);
-    }
 
     @Override
-    protected void doGet(HttpServletRequest request,
-                         HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+
+        // Lấy dữ liệu từ form, nếu null thì set chuỗi rỗng để tránh lỗi
+        String firstName = request.getParameter("firstName");
+        if (firstName == null) firstName = "";
+
+        String lastName = request.getParameter("lastName");
+        if (lastName == null) lastName = "";
+
+        String email = request.getParameter("email");
+        if (email == null) email = "";
+
+        String dob = request.getParameter("dob");
+        if (dob == null) dob = "";
+
+        String hearAbout = request.getParameter("hearAbout");
+        if (hearAbout == null) hearAbout = "Not specified";
+
+        String receiveNews = request.getParameter("receiveNews");
+        if (receiveNews == null) receiveNews = "No";
+
+        String receiveEmail = request.getParameter("receiveEmail");
+        if (receiveEmail == null) receiveEmail = "No";
+
+        String contactMethod = request.getParameter("contactMethod");
+        if (contactMethod == null) contactMethod = "Not specified";
+
+        // Đưa dữ liệu sang JSP
+        request.setAttribute("firstName", firstName);
+        request.setAttribute("lastName", lastName);
+        request.setAttribute("email", email);
+        request.setAttribute("dob", dob);
+        request.setAttribute("hearAbout", hearAbout);
+        request.setAttribute("receiveNews", receiveNews);
+        request.setAttribute("receiveEmail", receiveEmail);
+        request.setAttribute("contactMethod", contactMethod);
+
+        // Forward sang thanks.jsp
+        RequestDispatcher dispatcher = request.getRequestDispatcher("thanks.jsp");
+        dispatcher.forward(request, response);
     }
 }

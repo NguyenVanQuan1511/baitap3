@@ -7,13 +7,12 @@
     <!-- Khai báo Servlet -->
     <servlet>
         <servlet-name>EmailListServlet</servlet-name>
-        <servlet-class>vn.edu.hcmute.fit.demo1.EmailListServlet</servlet-class>
+        <servlet-class>vn.edu.hcmuaf.fit.demo2.EmailListServlet</servlet-class>
     </servlet>
 
-    <!-- Mapping URL cho Servlet -->
     <servlet-mapping>
         <servlet-name>EmailListServlet</servlet-name>
-        <url-pattern>/emailList</url-pattern>
+        <url-pattern>/EmailListServlet</url-pattern>
     </servlet-mapping>
 
     <!-- Cấu hình session -->
